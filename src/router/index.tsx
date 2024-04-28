@@ -11,6 +11,10 @@ const routes = createBrowserRouter([
       { path: "/", element: <Navigate to="/registro-evaluaciones" replace /> },
       { path: "/registro-evaluaciones", element:  <RegistroEvaluacionesPage /> },
       { path: "/registro-evaluaciones/evaluacion-cursos", element: <EvaluacionesCursosPage/> },
+      {path: "/config", element: <>Hello World</>},
+      {path: "/config/periodos", element: <>Periodos</>},
+      {path: "/config/areas", element: <>Areas</>},
+      {path: "/config/competencias", element: <>Competencias</>},
     ],
   },
 ]);

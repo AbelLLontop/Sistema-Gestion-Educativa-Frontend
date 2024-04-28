@@ -6,7 +6,7 @@ const Periodo = () => {
     
     <article
     onClick={() => navigate("evaluacion-cursos")}
-    className="w-64 h-36 bg-white rounded-md flex flex-col justify-center items-center cursor-pointer hover:shadow-xl transition-all hover:scale-105 active:scale-100">
+    className="w-64 h-36 bg-white rounded-md flex flex-col justify-center items-center cursor-pointer hover:shadow-md transition-all hover:scale-[1.05] active:scale-100">
       <h4 className="text-[#0C1C2C] font-semibold">I BIMESTRE</h4>
       <span className="text-[#61707E]">Evaluacion Completada</span>
     </article>
