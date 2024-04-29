@@ -118,7 +118,7 @@ const Desplegable = ({
       </div>
       <div
         className={cn(
-          "pl-8 text-white  overflow-hidden h-[10rem] transition-all ",
+          "pl-8 text-white  overflow-hidden h-[12rem] transition-all ",
           {
             "h-0": !isActive || openSideNav,
           }
@@ -161,6 +161,18 @@ const Desplegable = ({
               to={"/config/competencias"}
             >
               Competencias
+            </NavLink>
+          </li>
+          <li>
+          <NavLink
+              className={({ isActive }) =>(
+                cn("block p-2 pl-4 rounded-md text-white/40", {
+                  "bg-primaryHover text-white ": isActive,
+                })
+              )}
+              to={"/config/niveles"}
+            >
+              Niveles
             </NavLink>
           </li>
         </ul>
