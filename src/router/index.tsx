@@ -20,6 +20,7 @@ const routes = createBrowserRouter([
       {path: "/config/areas", element: <AreasPage/>},
       {path: "/config/competencias", element: <CompetenciasPage/>},
       {path: "/config/niveles", element: <NivelesPage/>},
+      { path: "*", element: <Navigate to="/registro-evaluaciones" replace />}
     ],
   },
 ]);
