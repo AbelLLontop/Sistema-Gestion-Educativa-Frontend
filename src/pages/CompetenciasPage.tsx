@@ -1,3 +1,5 @@
+import SimpleTable from "../components/SimpleTable"
+
 const CompetenciasPage = () => {
     return (
       <div>
@@ -10,31 +12,25 @@ const CompetenciasPage = () => {
   
      
       <section className="flex mb-8">
-        <section className="flex-1 p-8 bg-white rounded-md">
-          <table className="w-full table-auto text-[#0C1C2C]">
-            <thead>
-              <tr className="border-b border-[#DBDEE1]">
-                <th className="w-12 pb-2">N°</th>
-                <th className="w-[28rem] pb-2">Codigo</th>
-                <th className="w-[28rem] pb-2">Descripcion</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="text-center border-b border-[#DBDEE1] hover:bg-slate-100 ">
-                  <td>
-                      1
-                  </td>
-                  <td>
-                    CP01 
-                  </td>
-                    <td>
-                        Capacidad de analisis y logica en el desarrollo de software
-                    </td>
-              </tr>
-          
-            </tbody>
-          </table>
-        </section>
+      <SimpleTable
+        headers={
+          [
+            { name: "N°",nameRow:"id",class:"text"},
+            { name: "Codigo",nameRow:"codigo" ,class:"w-[28rem]"},
+            { name: "Descripcion",nameRow:"descripcion" ,class:"w-[28rem]"}
+          ]
+
+        }
+        rows={[
+          { id: "1", codigo: "CP01", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+          { id: "2", codigo: "CP02", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+          { id: "3", codigo: "CP03", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+          { id: "4", codigo: "CP04", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+          { id: "5", codigo: "CP05", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+          { id: "6", codigo: "CP06", descripcion: "Capacidad de analisis y logica en el desarrollo de software" },
+        ]}
+        />
+       
       </section>
     </div>
     )
