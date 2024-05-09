@@ -1,14 +1,19 @@
 import { ComponentProps, useEffect, useState } from "react";
+import { GrDocumentConfig } from "react-icons/gr";
+import { ImAddressBook } from "react-icons/im";
 
 import { TiThMenu } from "react-icons/ti";
 import { PiStudentFill } from "react-icons/pi";
 import { FaBook } from "react-icons/fa";
 import { cn } from "../utils/cn";
-import { NavLink, useLocation, useParams, useRoutes, useSearchParams } from "react-router-dom";
+import {
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 import { IoIosArrowUp } from "react-icons/io";
 
 const SideNav = ({ className }: ComponentProps<"aside">) => {
-  const [openSideNav, setOpenSideNav] = useState(true);
+  const [openSideNav, setOpenSideNav] = useState(false);
   return (
     <aside
       className={cn(
@@ -19,12 +24,12 @@ const SideNav = ({ className }: ComponentProps<"aside">) => {
         }
       )}
     >
-      <nav className="p-4">
+      <nav>
         <div
           onClick={() => setOpenSideNav(!openSideNav)}
           className={cn(
             "h-12 flex mb-4 items-center cursor-pointer",
-            "border-b border-white/10"
+            "border-b border-white/10 p-4"
           )}
         >
           <TiThMenu
@@ -33,16 +38,16 @@ const SideNav = ({ className }: ComponentProps<"aside">) => {
             })}
           />
         </div>
-        <ul className="space-y-4">
-          <li>
+        <ul className="">
+          <li className="block px-1">
             <NavLink
               to="/registro-evaluaciones"
               className={({ isActive }) =>
                 cn(
-                  "text-white/60 py-4 px-8 flex gap-2 items-center rounded-md whitespace-nowrap",
+                  "text-white/60 py-3 px-5 flex gap-2 items-center rounded-lg whitespace-nowrap hover:text-white transition-all",
                   {
-                    "px-5 ": openSideNav,
-                    "bg-primaryHover text-white font-bold": isActive,
+                    "px-8 ": openSideNav,
+                    "bg-primaryHover text-white ": isActive,
                   }
                 )
               }
@@ -53,7 +58,7 @@ const SideNav = ({ className }: ComponentProps<"aside">) => {
                 })}
               />
               <div
-                className={cn("transition-all font-semibold", {
+                className={cn("transition-all", {
                   "opacity-0 translate-x-full": openSideNav,
                 })}
               >
@@ -64,6 +69,61 @@ const SideNav = ({ className }: ComponentProps<"aside">) => {
           <li>
             <Desplegable openSideNav={openSideNav} />
           </li>
+      
+          <li className="block px-1">
+            <NavLink
+              to="/estudiantes"
+              className={({ isActive }) =>
+                cn(
+                  "text-white/60 py-3 px-5 flex gap-2 items-center rounded-lg whitespace-nowrap hover:text-white transition-all",
+                  {
+                    "px-8 ": openSideNav,
+                    "bg-primaryHover text-white ": isActive,
+                  }
+                )
+              }
+            >
+              <PiStudentFill
+                className={cn("text-xl flex-shrink-0 transition-all", {
+                  "text-2xl": openSideNav,
+                })}
+              />
+              <div
+                className={cn("transition-all", {
+                  "opacity-0 translate-x-full": openSideNav,
+                })}
+              >
+                Estudiantes
+              </div>
+            </NavLink>
+          </li>
+          <li className="block px-1">
+            <NavLink
+              to="/asistencia"
+              className={({ isActive }) =>
+                cn(
+                  "text-white/60 py-3 px-5 flex gap-2 items-center rounded-lg whitespace-nowrap hover:text-white transition-all",
+                  {
+                    "px-8": openSideNav,
+                    "bg-primaryHover text-white ": isActive,
+                  }
+                )
+              }
+            >
+              <ImAddressBook
+                className={cn("text-xl flex-shrink-0 transition-all", {
+                  "text-2xl": openSideNav,
+                })}
+              />
+              <div
+                className={cn("transition-all", {
+                  "opacity-0 translate-x-full": openSideNav,
+                })}
+              >
+                Asistencia
+              </div>
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
@@ -71,105 +131,105 @@ const SideNav = ({ className }: ComponentProps<"aside">) => {
 };
 
 const Desplegable = ({
-  children,
   openSideNav,
 }: ComponentProps<"div"> & { openSideNav: boolean }) => {
   const [isActive, setIsActive] = useState(false);
-  const params= useLocation();
-  useEffect(()=>{
+  const params = useLocation();
+  useEffect(() => {
     if (params.pathname.includes("/config/")) {
       setIsActive(true);
     }
-  },[params])
+  }, [params]);
 
   return (
-    <div className="cursor-pointer">
-      <div
-       onClick={() => setIsActive(!isActive)}
-        className={cn(
-          "text-white/60 py-4 px-8 flex gap-2 items-center rounded-md whitespace-nowrap",
-          {
-            "px-5 ": openSideNav,
-            "bg-primaryHover text-white": isActive,
-          }
-        )}
-      >
-        <PiStudentFill
-          className={cn("text-xl flex-shrink-0 transition-all", {
-            "text-2xl": openSideNav,
-          })}
-        />
-
+    <div className="cursor-pointer ">
+      <div className="px-1">
         <div
+          onClick={() => setIsActive(!isActive)}
           className={cn(
-            "transition-all font-semibold flex items-center justify-between w-full",
+            "text-white/60 py-3 px-5  flex gap-2 items-center rounded-lg whitespace-nowrap hover:text-white transition-all",
             {
-              "opacity-0 translate-x-full": openSideNav,
+              "px-8": openSideNav,
+              // "bg-primaryHover text-white": isActive,
             }
           )}
         >
-          Configuracion
-          <IoIosArrowUp
+          <GrDocumentConfig
             className={cn("text-xl flex-shrink-0 transition-all", {
-              "rotate-180": isActive,
+              "text-2xl": openSideNav,
             })}
           />
+
+          <div
+            className={cn(
+              "transition-all  flex items-center justify-between w-full",
+              {
+                "opacity-0 translate-x-full": openSideNav,
+              }
+            )}
+          >
+            Configuracion
+            <IoIosArrowUp
+              className={cn("text-xl flex-shrink-0 transition-all", {
+                "rotate-180": isActive,
+              })}
+            />
+          </div>
         </div>
       </div>
       <div
         className={cn(
-          "pl-8 text-white  overflow-hidden h-[12rem] transition-all ",
+          " text-white overflow-hidden transition-all bg-black/40 h-[13rem]",
           {
             "h-0": !isActive || openSideNav,
           }
         )}
       >
-        <ul
-          className={cn(
-            "pl-4 mt-4 overflow-hidden border-l-2 border-primaryHover/80 transition-all"
-          )}
-        >
-          <li>  <NavLink
-              className={({ isActive }) =>(
-                cn("block p-2 pl-4 rounded-md text-white/40", {
-                  "bg-primaryHover text-white": isActive,
+        <ul className={cn("mt-2 transition-all ")}>
+          <li className="block px-1">
+            {" "}
+            <NavLink
+              className={({ isActive }) =>
+                cn("block px-5 py-3  rounded-lg text-white/40 pl-12 hover:text-white transition-all", {
+                  "bg-primaryHover text-white ": isActive,
                 })
-              )}
+              }
               to={"/config/periodos"}
             >
               Periodos
-            </NavLink></li>
-          <li>
+            </NavLink>
+          </li>
+          <li className="block px-1 ">
             <NavLink
-              className={({ isActive }) =>(
-                cn("block p-2 pl-4 rounded-md text-white/40", {
+              className={({ isActive }) =>
+                cn("block px-5 py-3  rounded-lg text-white/40 pl-12 hover:text-white transition-all", {
                   "bg-primaryHover text-white ": isActive,
                 })
-              )}
+              }
               to={"/config/areas"}
             >
               Areas
             </NavLink>
           </li>
-          <li>
-          <NavLink
-              className={({ isActive }) =>(
-                cn("block p-2 pl-4 rounded-md text-white/40", {
+          <li className="block px-1">
+            <NavLink
+              className={({ isActive }) =>
+                cn("block rounded-lg text-white/40 px-5 py-3 pl-12 hover:text-white transition-all", {
                   "bg-primaryHover text-white ": isActive,
                 })
-              )}
+              }
               to={"/config/competencias"}
             >
               Competencias
             </NavLink>
           </li>
-          <li>
-          <NavLink
-              className={({ isActive }) =>(
-                cn("block p-2 pl-4 rounded-md text-white/40", {
+          <li className="block px-1">
+            <NavLink
+              className={({ isActive }) =>
+                cn("block rounded-lg text-white/40  px-5 py-3 pl-12 hover:text-white transition-all", {
                   "bg-primaryHover text-white ": isActive,
                 })
-              )}
+              }
               to={"/config/niveles"}
             >
               Niveles
