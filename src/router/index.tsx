@@ -6,6 +6,7 @@ import PeriodosPage from "../pages/PeriodosPage";
 import AreasPage from "../pages/AreasPage";
 import CompetenciasPage from "../pages/CompetenciasPage";
 import NivelesPage from "../pages/NivelesPage";
+import LoginPage from "../pages/Login";
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
       { path: "*", element: <Navigate to="/registro-evaluaciones" replace />}
     ],
   },
+  {
+    path:"/login",
+    element: <LoginPage />,
+  }
 ]);
 
 export default routes;
