@@ -8,10 +8,27 @@ import CompetenciasPage from "../pages/CompetenciasPage";
 import NivelesPage from "../pages/NivelesPage";
 import LoginPage from "../pages/Login";
 
+type RouteProps = {
+  children: JSX.Element;
+};
+
+const PublicRoute = ({ children }: RouteProps) => {
+  const token = localStorage.getItem("token");
+  console.log("PUBLIC",token);
+  return token ? <Navigate to="/" replace /> : children;
+};
+
+const PrivateRoute = ({ children }: RouteProps) => {
+  const token = localStorage.getItem("token");
+  console.log("PRIVATE",token);
+  return token ? children : <Navigate to="/login" replace />;
+};
+
+
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <PrivateRoute><Layout /></PrivateRoute>,
     children: [
       { path: "/", element: <Navigate to="/registro-evaluaciones" replace /> },
       { path: "/registro-evaluaciones", element:  <RegistroEvaluacionesPage /> },
@@ -26,7 +43,7 @@ const routes = createBrowserRouter([
   },
   {
     path:"/login",
-    element: <LoginPage />,
+    element: <PublicRoute><LoginPage /></PublicRoute>,
   }
 ]);
 

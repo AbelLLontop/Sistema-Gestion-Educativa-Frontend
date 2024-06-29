@@ -1,6 +1,12 @@
+import { useEffect } from "react"
 import SimpleTable from "../components/SimpleTable"
+import areaService from "../services/area.service"
 
 const AreasPage = () => {
+  useEffect(()=>{
+    areaService.create({nombre:"Matematica"})
+
+  },[])
     return (
       <div>
       <header className="mb-8">

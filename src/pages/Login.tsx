@@ -1,6 +1,7 @@
-import { ComponentProps, FormEvent, useState } from "react";
+import { ComponentProps, FormEvent, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
+import loginStore from "../store/login.store";
 
 const SimpleInput = ({name, type="text",autoFocus=false,value,setValue}:ComponentProps<"input">&{name:string,value:string,setValue:(e:string)=>void})=>{
     return (
@@ -34,44 +35,28 @@ const SimpleInput = ({name, type="text",autoFocus=false,value,setValue}:Componen
         </div>
     )
 }
-const login = async (email:string,password:string)=>{
-    const response = await fetch("http://localhost:3000/api/auth/login",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({email,password})
-    })
-    const data = await response.json();
-    return data;
 
-}
 const LoginPage = () => {
+    const {error,loading,login,res} = loginStore()
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
-    const [res,setRes] = useState("");
-    const [error,setError] = useState("");
-    const [loading, setLoading] = useState(false);
+    const data = loginStore((state)=>state.data)
     const navigate = useNavigate();
 
-    const handleSubmit = async (e:FormEvent)=>{
-        e.preventDefault();
-        setError("");
-        setLoading(true);
-        const response = await login(username,password);
-        if(response?.error){
-            if(response.type === "APPLICATION ERROR"){
-                setError(response.message);
-            }
-        }
-        //! aplicar delay al loading para que no den click infinitos a un boton
-        setLoading(false);
-        setRes(JSON.stringify(response,null,2));
+    useEffect(()=>{
+      if(data){
         navigate("/",{
           replace:true,
         })
-        
+      }
+    },[data,navigate])
+
+    const handleSubmit = async (e:FormEvent)=>{
+        e.preventDefault();
+        await login({email:username,password});
     }
+    
+
   return (
     <>
     <div className="flex justify-center w-full h-screen bg-slate-50">
